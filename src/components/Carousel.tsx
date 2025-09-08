@@ -19,37 +19,77 @@ const Carousel: React.FC<Props> = ({
   infinite = false,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [duration, setDuration] = useState(animationDuration);
+  const [width, setWidth] = useState(itemWidth);
+  const [size, setSize] = useState(frameSize);
+  const [moveStep, setMoveStep] = useState(step);
 
-  const canGoNext = infinite ? true : currentIndex + frameSize < images.length;
+  const canGoNext = infinite ? true : currentIndex + size < images.length;
   const canGoPrev = infinite ? true : currentIndex > 0;
 
   const handleNext = () => {
     if (infinite) {
-      setCurrentIndex(prev => (prev + step) % images.length);
+      setCurrentIndex(prev => (prev + moveStep) % images.length);
     } else if (canGoNext) {
-      setCurrentIndex(prev => Math.min(prev + step, images.length - frameSize));
+      setCurrentIndex(prev => Math.min(prev + moveStep, images.length - size));
     }
   };
 
   const handlePrev = () => {
     if (infinite) {
-      setCurrentIndex(prev => (prev - step + images.length) % images.length);
+      setCurrentIndex(
+        prev => (prev - moveStep + images.length) % images.length,
+      );
     } else if (canGoPrev) {
-      setCurrentIndex(prev => Math.max(0, prev - step));
+      setCurrentIndex(prev => Math.max(0, prev - moveStep));
     }
   };
 
   return (
-    <div
-      className="Carousel"
-      style={{ width: `${frameSize * (itemWidth + 10)}px` }}
-    >
+    <div className="Carousel" style={{ width: `${size * (width + 10)}px` }}>
+      <div className="Carousel__controls">
+        <label>
+          Item Width:
+          <input
+            type="number"
+            value={width}
+            onChange={e => setWidth(Number(e.target.value))}
+          />
+        </label>
+
+        <label>
+          Frame Size:
+          <input
+            type="number"
+            value={size}
+            onChange={e => setSize(Number(e.target.value))}
+          />
+        </label>
+
+        <label>
+          Step:
+          <input
+            type="number"
+            value={moveStep}
+            onChange={e => setMoveStep(Number(e.target.value))}
+          />
+        </label>
+
+        <label>
+          Animation Duration:
+          <input
+            type="number"
+            value={duration}
+            onChange={e => setDuration(Number(e.target.value))}
+          />
+        </label>
+      </div>
       <div className="Carousel__container">
         <ul
           className="Carousel__list"
           style={{
-            transform: `translateX(-${currentIndex * (itemWidth + 10)}px)`,
-            transitionDuration: `${animationDuration}ms`,
+            transform: `translateX(-${currentIndex * (width + 10)}px)`,
+            transitionDuration: `${duration}ms`,
           }}
         >
           {images.map((src, index) => (
@@ -57,7 +97,8 @@ const Carousel: React.FC<Props> = ({
               <img
                 src={src}
                 alt={`Slide ${index + 1}`}
-                style={{ width: `${itemWidth}px` }}
+                style={{ width: `${width}px` }}
+                width={width}
               />
             </li>
           ))}
