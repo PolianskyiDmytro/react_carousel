@@ -88,16 +88,26 @@ const Carousel: React.FC<Props> = ({
             transitionDuration: `${duration}ms`,
           }}
         >
-          {images.map((src, index) => (
-            <li key={src} className="Carousel__item">
-              <img
-                src={src}
-                alt={`Slide ${index + 1}`}
-                style={{ width: `${width}px` }}
-                width={width}
-              />
-            </li>
-          ))}
+          {images.map((src, index) => {
+            const hidden = index < currentIndex || index >= currentIndex + size;
+
+            return (
+              <li
+                key={src}
+                className="Carousel__item"
+                style={{
+                  visibility: hidden ? 'hidden' : 'visible',
+                }}
+              >
+                <img
+                  src={src}
+                  alt={`Slide ${index + 1}`}
+                  style={{ width: `${width}px` }}
+                  width={width}
+                />
+              </li>
+            );
+          })}
         </ul>
       </div>
 
