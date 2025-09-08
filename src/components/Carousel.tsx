@@ -48,9 +48,9 @@ const Carousel: React.FC<Props> = ({
   return (
     <div className="Carousel" style={{ width: `${size * (width + 10)}px` }}>
       <div className="Carousel__controls">
-        <label htmlFor="widthId">Item Width: </label>
+        <label htmlFor="itemId">Item Width: </label>
         <input
-          id="widthId"
+          id="itemId"
           type="number"
           value={width}
           onChange={e => setWidth(Number(e.target.value))}
