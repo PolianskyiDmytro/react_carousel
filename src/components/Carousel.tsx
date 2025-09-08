@@ -93,7 +93,7 @@ const Carousel: React.FC<Props> = ({
 
             return (
               <li
-                key={src}
+                key={`${src}-${index}`}
                 className="Carousel__item"
                 style={{
                   visibility: hidden ? 'hidden' : 'visible',
