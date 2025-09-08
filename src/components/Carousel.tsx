@@ -48,41 +48,37 @@ const Carousel: React.FC<Props> = ({
   return (
     <div className="Carousel" style={{ width: `${size * (width + 10)}px` }}>
       <div className="Carousel__controls">
-        <label>
-          Item Width:
-          <input
-            type="number"
-            value={width}
-            onChange={e => setWidth(Number(e.target.value))}
-          />
-        </label>
+        <label htmlFor="widthId">Item Width: </label>
+        <input
+          id="widthId"
+          type="number"
+          value={width}
+          onChange={e => setWidth(Number(e.target.value))}
+        />
 
-        <label>
-          Frame Size:
-          <input
-            type="number"
-            value={size}
-            onChange={e => setSize(Number(e.target.value))}
-          />
-        </label>
+        <label htmlFor="frameId">Frame Size:</label>
+        <input
+          id="frameId"
+          type="number"
+          value={size}
+          onChange={e => setSize(Number(e.target.value))}
+        />
 
-        <label>
-          Step:
-          <input
-            type="number"
-            value={moveStep}
-            onChange={e => setMoveStep(Number(e.target.value))}
-          />
-        </label>
+        <label htmlFor="stepId">Step:</label>
+        <input
+          id="stepId"
+          type="number"
+          value={moveStep}
+          onChange={e => setMoveStep(Number(e.target.value))}
+        />
 
-        <label>
-          Animation Duration:
-          <input
-            type="number"
-            value={duration}
-            onChange={e => setDuration(Number(e.target.value))}
-          />
-        </label>
+        <label htmlFor="durationId">Animation Duration: </label>
+        <input
+          id="durationId"
+          type="number"
+          value={duration}
+          onChange={e => setDuration(Number(e.target.value))}
+        />
       </div>
       <div className="Carousel__container">
         <ul
